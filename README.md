@@ -99,6 +99,47 @@ flutter pub get
 flutter run
 ```
 
+## 🚀 CI/CD & Automatic Deployment
+
+This project includes a complete CI/CD pipeline with automatic testing and deployment:
+
+### How It Works
+1. **Push code to GitHub** → `git push`
+2. **GitHub Actions runs tests** → Automatically validates code
+3. **Vercel deploys automatically** → Your app updates instantly
+
+### Setup Instructions
+👉 **[Read CI/CD_DEPLOYMENT_GUIDE.md](./CI_CD_DEPLOYMENT_GUIDE.md)** for complete 15-minute setup
+
+### Quick Reference
+```bash
+# One-time setup (15 min):
+git remote add origin https://github.com/YOUR_USERNAME/quantum-secure-chat.git
+git push -u origin main
+# Then connect GitHub to Vercel (see guide above)
+
+# Every update (10 sec):
+git add .
+git commit -m "Your message"
+git push
+# That's it! Auto-deployment happens
+```
+
+### Key Files
+- **`.github/workflows/`** - Automated tests for every push
+- **`vercel.json`** - Deployment configuration
+- **`frontend/lib/config/backend_config.dart`** - Centralized API configuration
+- **`CI_CD_DEPLOYMENT_GUIDE.md`** - Complete step-by-step guide
+
+### Environment Variables
+Set these in Vercel for backend API connection:
+```
+BACKEND_API_URL=https://your-api-backend-url.com/api
+BACKEND_WS_URL=wss://your-api-backend-url.com/api/ws/chat
+```
+
+*See [QUICK_START_CI_CD.md](./QUICK_START_CI_CD.md) for quick reference*
+
 ## Architecture
 
 ### System Design
