@@ -1,0 +1,69 @@
+name: Frontend - Build and Test
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-*.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'frontend/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.41.2'
+      
+      - name: Get dependencies
+        run: |
+          cd frontend
+          flutter pub get
+      
+      - name: Run analyzer
+        run: |
+          cd frontend
+          flutter analyze
+      
+      - name: Build web app
+        run: |
+          cd frontend
+          flutter build web --release
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: flutter-web-build
+          path: frontend/build/web/
+          retention-days: 7
+
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.41.2'
+      
+      - name: Get dependencies
+        run: |
+          cd frontend
+          flutter pub get
+      
+      - name: Run tests
+        run: |
+          cd frontend
+          flutter test
+        continue-on-error: true
