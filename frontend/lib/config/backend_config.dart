@@ -5,32 +5,29 @@ class BackendConfig {
   /// Get API URL - can be updated for different environments
   /// 
   /// For development: Uses local PC IP (192.168.29.109:8000)
-  /// For production: Use your deployed backend URL
-  /// 
+  /// For production: Use your deployed Firebase Functions URL
+  ///
   /// To change: Update the URL below or set via environment variable during build
   static String get apiUrl {
     // Development URL
     const String devUrl = 'http://192.168.29.109:8000/api';
-    
-    // Production URL - Replace with your actual deployed backend
-    // When you deploy, update this to your Render/Railway URL
-    const String prodUrl = 'https://your-backend-url.onrender.com/api';
-    
-    // Check if running in production environment
-    // For now, we'll use the dev URL
-    // In production, you would set this via environment variable
-    return devUrl;
-  }
 
-  static String get wsUrl {
+    // Production URL - Firebase Functions
+    // Replace 'your-project-id' with your actual Firebase project ID
+    const String prodUrl = 'https://us-central1-quantum-secure-chat.cloudfunctions.net/api';
+
+    // Check if running in production environment
+    // For now, we'll use the prod URL for Firebase deployment
+    return prodUrl;
     // Development WebSocket URL
     const String devUrl = 'ws://192.168.29.109:8000/api/ws/chat';
     
     // Production WebSocket URL (use wss:// for HTTPS)
-    // When you deploy, update this to your Render/Railway URL
-    const String prodUrl = 'wss://your-backend-url.onrender.com/api/ws/chat';
+    // Firebase Functions don't support WebSockets directly
+    // For now, we'll use polling or Firebase Realtime Database
+    const String prodUrl = 'wss://us-central1-quantum-secure-chat.cloudfunctions.net/ws';
     
-    return devUrl;
+    return prodUrl;
   }
 
   /// Update API URL for production deployment
