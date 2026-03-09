@@ -1,6 +1,16 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3-slim
 
+# Install build dependencies for compiling wheels
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    g++ \
+    make \
+    libssl-dev \
+    libffi-dev \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 EXPOSE 8000
 
 # Keeps Python from generating .pyc files in the container
