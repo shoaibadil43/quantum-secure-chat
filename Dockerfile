@@ -9,6 +9,9 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
 
+# Set Python path so gunicorn can find the backend module
+ENV PYTHONPATH=/app:$PYTHONPATH
+
 WORKDIR /app
 COPY . /app
 
