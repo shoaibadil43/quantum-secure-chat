@@ -10,3 +10,7 @@ services:
         value: sqlite:///./test.db
       - key: REDIS_URL
         value: redis://localhost:6379
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: "false"
