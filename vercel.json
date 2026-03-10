@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd frontend && flutter build web --release",
+  "buildCommand": "echo 'Using pre-built web files'",
   "outputDirectory": "frontend/build/web",
   "env": {
     "BACKEND_API_URL": "@backend_api_url",
