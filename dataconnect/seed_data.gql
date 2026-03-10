@@ -1,0 +1,117 @@
+mutation SeedData @transaction @auth(level: USER, insecureReason: "Seed data mutation is for development purposes and should not be exposed in production.") {
+  user_insertMany(data: [
+    {
+      id: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      displayName: "Alice Smith",
+      email: "alice.smith@example.com",
+      createdAt_expr: "request.time",
+      photoUrl: "https://example.com/alice.jpg"
+    },
+    {
+      id: "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22",
+      displayName: "Bob Johnson",
+      email: "bob.johnson@example.com",
+      createdAt_expr: "request.time",
+      photoUrl: "https://example.com/bob.jpg"
+    }
+  ])
+  movie_insertMany(data: [
+    {
+      id: "c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33",
+      title: "The Great Adventure",
+      year: 2022,
+      createdAt_expr: "request.time",
+      summary: "An epic journey of discovery.",
+      genres: ["Adventure", "Fantasy"],
+      runtime: 150
+    },
+    {
+      id: "d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44",
+      title: "Mystery in the City",
+      year: 2023,
+      createdAt_expr: "request.time",
+      summary: "A thrilling detective story.",
+      genres: ["Mystery", "Thriller"],
+      runtime: 120
+    }
+  ])
+  list_insertMany(data: [
+    {
+      id: "e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a55",
+      userId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      name: "Alice's Favorites",
+      public: true,
+      createdAt_expr: "request.time",
+      updatedAt_expr: "request.time",
+      description: "My top picks for movies."
+    },
+    {
+      id: "f5eebc99-9c0b-4ef8-bb6d-6bb9bd380a66",
+      userId: "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22",
+      name: "Bob's Watchlist",
+      public: false,
+      createdAt_expr: "request.time",
+      updatedAt_expr: "request.time",
+      description: "Movies I plan to watch soon."
+    }
+  ])
+  watch_insertMany(data: [
+    {
+      id: "g6eebc99-9c0b-4ef8-bb6d-6bb9bd380a77",
+      userId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      movieId: "c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33",
+      createdAt_expr: "request.time",
+      watchDate: "2023-10-26",
+      location: "Home"
+    },
+    {
+      id: "h7eebc99-9c0b-4ef8-bb6d-6bb9bd380a88",
+      userId: "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22",
+      movieId: "d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44",
+      createdAt_expr: "request.time",
+      watchDate: "2023-10-25",
+      location: "Cinema"
+    }
+  ])
+  listMovie_insertMany(data: [
+    {
+      listId: "e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a55",
+      movieId: "c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33",
+      position: 1,
+      note: "A must-watch!"
+    },
+    {
+      listId: "e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a55",
+      movieId: "d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44",
+      position: 2
+    },
+    {
+      listId: "f5eebc99-9c0b-4ef8-bb6d-6bb9bd380a66",
+      movieId: "d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44",
+      position: 1,
+      note: "Heard good things about this one."
+    }
+  ])
+  review_insertMany(data: [
+    {
+      id: "i8eebc99-9c0b-4ef8-bb6d-6bb9bd380a99",
+      movieId: "c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33",
+      userId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      watchId: "g6eebc99-9c0b-4ef8-bb6d-6bb9bd380a77",
+      rating: 5,
+      createdAt_expr: "request.time",
+      updatedAt_expr: "request.time",
+      review: "Absolutely loved it! A true masterpiece."
+    },
+    {
+      id: "j9eebc99-9c0b-4ef8-bb6d-6bb9bd380b00",
+      movieId: "d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44",
+      userId: "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22",
+      watchId: "h7eebc99-9c0b-4ef8-bb6d-6bb9bd380a88",
+      rating: 4,
+      createdAt_expr: "request.time",
+      updatedAt_expr: "request.time",
+      review: "A solid mystery, kept me guessing."
+    }
+  ])
+}

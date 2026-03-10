@@ -4,9 +4,6 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import '../config/backend_config.dart';
 
-/// Global backend URL - Uses BackendConfig for easy updates
-const String BACKEND_URL = BackendConfig.apiUrl;
-
 /// WebSocket Service
 class WebSocketService {
   static String get _baseUrl => BackendConfig.wsUrl;
@@ -44,7 +41,7 @@ class WebSocketService {
 
 /// API Service
 class APIService {
-  static const String _baseUrl = BACKEND_URL;
+  static String get _baseUrl => BackendConfig.apiUrl;
   static String? _authToken;
 
   /// Set auth token after login

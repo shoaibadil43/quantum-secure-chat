@@ -36,7 +36,7 @@ async def register(user_data: UserCreate, db: Session = Depends(get_db)):
     if not password_utils.is_strong_password(user_data.password):
         raise HTTPException(
             status_code=400,
-            detail="Password must contain uppercase, lowercase, digit, and special character"
+            detail="Password must be at least 6 characters long"
         )
     
     # Check existing user
